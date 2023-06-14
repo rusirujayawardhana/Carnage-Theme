@@ -1,0 +1,99 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+/>
+
+<!-- Slider main container -->
+<div class="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper" >
+    <!-- Slides -->
+    <div class="swiper-slide"><img src="https://cdn.shopify.com/s/files/1/0734/8155/2157/products/young-hip-woman-at-carnival_925x_e11f4329-e098-47f1-be40-a77430b5accd.jpg?v=1680063732%20925w"></div>
+    <div class="swiper-slide"><img src="https://cdn.shopify.com/s/files/1/0734/8155/2157/products/smiling-woman-on-snowy-afternoon_925x_e596fdef-f293-4614-9484-17d3cb84f26a.jpg?v=1680063728"></div>
+    <div class="swiper-slide"><img src="https://cdn.shopify.com/s/files/1/0734/8155/2157/products/woman-outside-brownstone_925x_dcc71308-1e10-441c-a9d3-0804df4fc02c.jpg?v=1680063734"></div>
+    <div class="swiper-slide"><img src="https://cdn.shopify.com/s/files/1/0734/8155/2157/products/young-man-in-bright-fashion_925x_2a225c8a-dd00-49fe-99b4-d9bba8aba063.jpg?v=1680063717"></div>
+    <div class="swiper-slide"><img src="https://cdn.shopify.com/s/files/1/0734/8155/2157/products/smiling-woman-poses_925x_7cbe1432-2c97-4ef9-86da-d7c8487669b5.jpg?v=1680063736"></div>
+   
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"> </div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- If we need scrollbar -->
+<!--   <div class="swiper-scrollbar"> </div> -->
+</div>
+
+
+<script type="module">
+  import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.esm.browser.min.js'
+
+ const swiper = new Swiper('.swiper', {
+  // Optional parameters
+  // direction: 'vertical',
+  //   loop: true,
+
+     autoplay: {
+       delay: 2500,
+       disableOnInteraction	: false,
+     },
+   
+
+  // If we need pagination
+      // pagination: {
+      //   el: '.swiper-pagination',
+      // },
+
+  // Navigation arrows
+  // navigation: {
+  //   nextEl: '.swiper-button-next',
+  //   prevEl: '.swiper-button-prev',
+  // },
+
+  // And if we need scrollbar
+  // scrollbar: {
+  //   el: '.swiper-scrollbar',
+  // },
+
+   slidesPerView: 1,
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,       
+      },
+    },
+   
+});
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+{% style %}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+.swiper-slide img{
+  width: 100%;
+  height: 50vh;
+  object-fit:cover;
+}
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "test slider",
+    "settings": [],
+     "presets" : [
+        {
+            "name" : "test slider"
+        }
+    ]
+  }
+{% endschema %}
+

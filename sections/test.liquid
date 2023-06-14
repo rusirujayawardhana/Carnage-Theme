@@ -1,0 +1,141 @@
+{%- style -%}
+.test-body {
+    max-width: 1920px;
+    width: 95%;
+    margin: auto;
+}
+.test_home_product_container{
+    border: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+  
+.test_home_product_container img{
+    object-fit:cover;
+    width: 100%;
+  max-height: 500px;
+  }
+
+.test_home_product_collection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media(max-width:768px){
+  .test_home_product_collection {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:550px){
+  .test_home_product_collection {
+    grid-template-columns: 1fr;
+  }
+}
+{%- endstyle -%}
+<div class="test-body">
+  
+<div>
+<h1>{{ section.settings.title }}</h1>
+</div>
+
+{% for block in section.blocks %}
+  
+  {%- if block.settings.carnage_video != blank -%}
+    {% comment %} /loop video/ {% endcomment %}
+    <video autoplay muted playsinline loop>
+      <source src={{block.settings.carnage_video | video_tag }}
+    </video>
+  {%- endif -%}
+
+  {% if block.settings.collection_carnage != blank %}
+    <h1>{{ block.settings.col_title }}</h1>
+    <div id="{{ block.id }}" class="test_home_product_collection" style="background:{{ block.settings.carnage_clr }}">                  
+        {% for product in block.settings.collection_carnage.products %}
+           <div class="test_home_product_container">
+             
+              <a href="{{ product.url }}">
+                  <img 
+                    srcset="{{ product.featured_image | image_url }} {{ product.featured_image.width }}w"
+                    src="{{product.featured_image | img_url}}"
+                    width="400" 
+                    height="600"
+                    loading="lazy"
+                  />
+              </a>
+              <h3>{{product.title}}</h3>                               
+              <a href="{{ product.url }}">Shop now</a>
+          </div>
+        {% endfor %}
+    </div>
+  {%endif%}  
+{% endfor %}
+</div>
+{% schema %}
+{    
+  "name": "test",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Multicolumn",
+      "label": "Enter random text"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "column",
+      "settings": [
+        {
+          "type": "video",
+          "id": "carnage_video",
+          "label": "Video"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "col_title",
+          "label": "Enter Collection Name"
+        },
+        {
+          "type": "color",
+          "id": "carnage_clr",
+          "label": "BG color"
+        },
+        {
+          "type": "collection",
+          "id": "collection_carnage",
+          "label": "select collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "test",
+      "blocks": [
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+
+{% javascript %}
+{% endjavascript %}

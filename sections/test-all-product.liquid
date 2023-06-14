@@ -1,0 +1,114 @@
+{% style %}
+  .test2-body {
+    max-width: 1920px;
+    width: 95%;
+    margin: auto;
+    background:{{ section.settings.carnage_clr }};
+    margin-top: 50px;
+}
+  .pagi {
+    display: flex;
+    justify-content: flex-start;
+    gap: 50px;
+    border-top: solid 1px;
+    padding: 20px;
+}
+
+.pagi a {
+    text-decoration: none;
+}
+span.page.current {
+    color: #838383;
+}
+  .page  a, .next a, .prev a {
+    color: black;
+}
+  
+  .test2_home_product_container{
+    border: none !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+    padding-bottom: 20px;
+}
+
+.test2_home_product_container a {
+    color: black;
+}
+  
+.test2_home_product_container img{
+    object-fit:cover;
+    width: 100%;
+    max-height: 500px;
+  }
+
+.test2_home_product_collection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+@media(max-width:768px){
+  .test2_home_product_collection {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media(max-width:550px){
+  .test2_home_product_collection {
+    grid-template-columns: 1fr;
+  }
+}
+
+{% endstyle %}
+
+<div class="test2-body">
+
+  {% paginate collections.all.products by 8 %}
+  <div class="test2_home_product_collection">
+      {% for product in collections.all.products  %}
+         <div class="test2_home_product_container">
+            <a href="{{ product.url }}">
+                <img 
+                  srcset="{{ product.featured_image | image_url }} {{ product.featured_image.width }}w"
+                  src="{{product.featured_image | img_url}}"
+                  width="400" 
+                  height="600"
+                  loading="lazy"
+                />
+            </a>
+            <h3>{{product.title}}</h3>                               
+            <a href="{{ product.url }}">Shop now</a>
+        </div>
+      {% endfor %}
+  </div>
+  
+  <div class="pagi"">
+    {{ paginate | default_pagination }}
+    {% endpaginate %}
+  </div>
+
+</div>
+
+{% schema %}
+  {
+    "name": "test all product",
+    "settings": [
+        {
+          "type": "color",
+          "id": "carnage_clr",
+          "label": "BG color"
+        }
+    ],
+     "presets" : [
+        {
+            "name" : "test all product"
+        }
+    ]
+  }
+{% endschema %}
+
+
+
+{% javascript %}
+{% endjavascript %}
